@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>En campos de fútbol son...
+        </title>
+        <link rel="stylesheet" href="futbol.min.css" />
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+        <style>
+            /* App custom styles */
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.js">
+        </script>
+        <script src="my.js">
+        </script>
+        <script src='ajax.js'></script>
+
+    </head>
+    <body>
+        <!-- Home -->
+        <div data-role="page" id="page1">
+            <div data-theme="d" data-role="header">
+                <h5>
+                    «FÚRGOL»
+                </h5>
+            </div>
+            <div id="wrapper" style="max-width:960px">
+              <div data-role="content" style="padding: 15px">
+                  <div data-role="fieldcontain">
+                      <fieldset data-role="controlgroup">
+                          <label for="textinput1">
+                          </label>
+                          <input name="" id="textinput1" placeholder="Dimensiones" value="" type="text" />
+                      </fieldset>
+                  </div>
+                  <div data-role="fieldcontain">
+                      <label for="selectmenu1">
+                          Unidades
+                      </label>
+                      <select name="selectmenu1" id="selectmenu1" data-theme="d" data-mini="true">
+                          <option value="1">
+                              metros cuadrados
+                          </option>
+                          <option value="2">
+                              kilómetros cuadrados
+                          </option>
+                      </select>
+                  </div>
+                  <input type="submit" data-theme="d" value="¡Quiero ser periodista!" id="calcular" />
+                  <h3 class="regando" style="display:none">
+                      Regando el cesped…<br /><img alt="cargando resultados" src="images/load.gif" />
+                  </h3>
+                  <h1 class="resultado">
+                  </h1>
+                  <div class="twitter" style="display:none">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="tuotranovia" data-lang="es" data-size="large">Twittear</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </body>
+    <script>
+          var ANCHURA_CAMPO = 45;
+          var ALTURA_CAMPO = 90;
+          var MEDIDAS_M = ANCHURA_CAMPO * ALTURA_CAMPO;
+          var MEDIDAS_K = MEDIDAS_M/1000000;
+      $('#calcular').click(function(){
+        if(!$.isNumeric($('#textinput1').val())){
+                alert('Las dimensiones a medir no existen o no son válidas');
+                return false;
+        }
+        else{    
+          $('.resultado').empty();
+          $('.regando').fadeIn(500);
+          if ($('#selectmenu1').val()==1){
+            var unidad = 'm<sup>2</sup>';
+            var resultado = ($('#textinput1').val()/MEDIDAS_M).toFixed(8);
+          }
+          else{
+            var resultado = ($('#textinput1').val()/MEDIDAS_K).toFixed(8);
+            var unidad = 'km<sup>2</sup>';
+          }
+          $('.regando').fadeOut(1000, function(){
+              $('.resultado').html($('#textinput1').val()+unidad+' son equivalentes a <span style="font-style:italic">'+resultado+'</span> campos de fútbol');
+              $('.twitter').show();
+          });
+        }
+      });
+     </script>
+</html>
